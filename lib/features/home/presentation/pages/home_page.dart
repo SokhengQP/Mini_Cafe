@@ -32,10 +32,26 @@ class HomeScreen extends StatelessWidget {
                   crossAxisSpacing: 15,
                   mainAxisSpacing: 15,
                   children: const [
-                    CoffeeCard(name: "Arabica", price: "18"),
-                    CoffeeCard(name: "Robusta", price: "20"),
-                    CoffeeCard(name: "Excelsa", price: "15"),
-                    CoffeeCard(name: "Liberica", price: "12"),
+                    CoffeeCard(
+                      name: "Arabica",
+                      price: "18",
+                      image: "assets/images/arabica.png",
+                    ),
+                    CoffeeCard(
+                      name: "Robusta",
+                      price: "20",
+                      image: "assets/images/robusta.png",
+                    ),
+                    CoffeeCard(
+                      name: "Excelsa",
+                      price: "15",
+                      image: "assets/images/excelsa.png",
+                    ),
+                    CoffeeCard(
+                      name: "Liberica",
+                      price: "12",
+                      image: "assets/images/liberica.png",
+                    ),
                   ],
                 ),
               ),

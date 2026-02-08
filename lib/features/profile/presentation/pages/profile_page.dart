@@ -1,3 +1,8 @@
+import 'package:cafe_cool/features/profile/presentation/pages/widgets/invite_friends_screen.dart';
+import 'package:cafe_cool/features/profile/presentation/pages/widgets/logout_dialog.dart';
+import 'package:cafe_cool/features/profile/presentation/pages/widgets/my_orders_screen.dart';
+import 'package:cafe_cool/features/profile/presentation/pages/widgets/privacy_policy_screen.dart';
+import 'package:cafe_cool/features/profile/presentation/pages/widgets/settings_screen.dart';
 import 'package:cafe_cool/shared/widgets/profile_menu_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -46,18 +51,63 @@ class ProfileScreen extends StatelessWidget {
               /// Profile Menu List
               Expanded(
                 child: ListView(
-                  children: const [
+                  children: [
                     ProfileMenuTile(
                       icon: Icons.shopping_bag,
                       title: "My Orders",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const MyOrdersScreen(),
+                          ),
+                        );
+                      },
                     ),
-                    ProfileMenuTile(icon: Icons.settings, title: "Settings"),
-                    ProfileMenuTile(icon: Icons.lock, title: "Privacy Policy"),
-                    ProfileMenuTile(icon: Icons.group, title: "Invite Friends"),
+
+                    ProfileMenuTile(
+                      icon: Icons.settings,
+                      title: "Settings",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SettingsScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    ProfileMenuTile(
+                      icon: Icons.lock,
+                      title: "Privacy Policy",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const PrivacyPolicyScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    ProfileMenuTile(
+                      icon: Icons.group,
+                      title: "Invite Friends",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const InviteFriendsScreen(),
+                          ),
+                        );
+                      },
+                    ),
                     ProfileMenuTile(
                       icon: Icons.logout,
                       title: "Logout",
                       isLogout: true,
+                      onTap: () {
+                        showLogoutDialog(context);
+                      },
                     ),
                   ],
                 ),

@@ -1,4 +1,4 @@
-import 'package:cafe_cool/shared/widgets/favorite_card.dart';
+import 'package:cafe_cool/shared/widgets/coffee_card.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteScreen extends StatelessWidget {
@@ -56,10 +56,26 @@ class FavoriteScreen extends StatelessWidget {
                   mainAxisSpacing: 18,
                   crossAxisSpacing: 18,
                   children: const [
-                    FavoriteCard(name: "Arabica", price: "18"),
-                    FavoriteCard(name: "Robusta", price: "20"),
-                    FavoriteCard(name: "Excelsa", price: "15"),
-                    FavoriteCard(name: "Liberica", price: "12"),
+                    CoffeeCard(
+                      name: "Arabica",
+                      price: "18",
+                      image: "assets/images/arabica.png",
+                    ),
+                    CoffeeCard(
+                      name: "Robusta",
+                      price: "20",
+                      image: "assets/images/robusta.png",
+                    ),
+                    CoffeeCard(
+                      name: "Excelsa",
+                      price: "15",
+                      image: "assets/images/excelsa.png",
+                    ),
+                    CoffeeCard(
+                      name: "Liberica",
+                      price: "12",
+                      image: "assets/images/liberica.png",
+                    ),
                   ],
                 ),
               ),

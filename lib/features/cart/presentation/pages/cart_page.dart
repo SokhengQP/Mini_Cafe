@@ -30,8 +30,16 @@ class CartScreen extends StatelessWidget {
               Expanded(
                 child: ListView(
                   children: const [
-                    CartItemTile(name: "Arabica", price: 18),
-                    CartItemTile(name: "Robusta", price: 20),
+                    CartItemTile(
+                      name: "Arabica",
+                      price: 18,
+                      image: "assets/images/arabica.png",
+                    ),
+                    CartItemTile(
+                      name: "Arabica",
+                      price: 18,
+                      image: "assets/images/arabica.png",
+                    ),
                   ],
                 ),
               ),

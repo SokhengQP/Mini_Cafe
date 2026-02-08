@@ -3,68 +3,44 @@ import 'package:flutter/material.dart';
 class CoffeeCard extends StatelessWidget {
   final String name;
   final String price;
+  final String image;
 
-  const CoffeeCard({super.key, required this.name, required this.price});
+  const CoffeeCard({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF7B5A4A),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 10,
-            offset: const Offset(0, 6),
-          ),
-        ],
+        color: Colors.brown.shade50,
+        borderRadius: BorderRadius.circular(16),
       ),
-
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Coffee Icon / Image
-          const Center(
-            child: Icon(Icons.coffee, size: 48, color: Colors.white),
-          ),
-
-          const Spacer(),
-
-          /// Coffee Name
-          Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
             ),
           ),
 
-          const SizedBox(height: 4),
+          const SizedBox(height: 10),
 
-          /// Price + Add Button Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "\$$price",
-                style: const TextStyle(color: Colors.white70, fontSize: 14),
-              ),
-
-              /// Add Button
-              Container(
-                height: 36,
-                width: 36,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Icon(Icons.add, color: Colors.white, size: 20),
-              ),
-            ],
+          Text(
+            name,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
+
+          Text("\$$price"),
         ],
       ),
     );

@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 class CartItemTile extends StatelessWidget {
   final String name;
   final int price;
+  final String image;
+  final int quantity;
 
-  const CartItemTile({super.key, required this.name, required this.price});
+  const CartItemTile({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.image,
+    this.quantity = 1,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,32 +23,55 @@ class CartItemTile extends StatelessWidget {
         color: const Color(0xFF1E1E1E),
         borderRadius: BorderRadius.circular(16),
       ),
-
       child: Row(
         children: [
-          const Icon(Icons.coffee, color: Colors.white),
+          /// Product Image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(image, height: 60, width: 60, fit: BoxFit.cover),
+          ),
 
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
 
+          /// Product Info
           Expanded(
-            child: Text(name, style: const TextStyle(color: Colors.white)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "\$$price",
+                  style: const TextStyle(
+                    color: Colors.brown,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
           ),
 
           /// Quantity Selector
           Row(
             children: [
               _qtyButton(Icons.remove),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text("1", style: TextStyle(color: Colors.white)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  quantity.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
               _qtyButton(Icons.add),
             ],
           ),
-
-          const SizedBox(width: 10),
-
-          Text("\$$price", style: const TextStyle(color: Colors.white)),
         ],
       ),
     );
