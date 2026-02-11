@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class FavoriteCard extends StatelessWidget {
   final String name;
   final String price;
-
-  const FavoriteCard({super.key, required this.name, required this.price});
+  final String imagePath;
+  const FavoriteCard({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.imagePath,
+  });
 
   @override
   Widget build(BuildContext context) {

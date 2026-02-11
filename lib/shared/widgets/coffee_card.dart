@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class CoffeeCard extends StatelessWidget {
   final String name;
   final String price;
-  final String image;
+  final String imagePath;
 
   const CoffeeCard({
     super.key,
     required this.name,
     required this.price,
-    required this.image,
+    required this.imagePath,
   });
 
   @override
@@ -26,20 +26,14 @@ class CoffeeCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                image,
+                imagePath,
                 fit: BoxFit.cover,
                 width: double.infinity,
               ),
             ),
           ),
-
           const SizedBox(height: 10),
-
-          Text(
-            name,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-
+          Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
           Text("\$$price"),
         ],
       ),

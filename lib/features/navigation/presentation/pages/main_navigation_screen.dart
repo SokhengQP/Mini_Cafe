@@ -14,27 +14,60 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int currentIndex = 0;
+  late PageController _pageController;
 
-  final screens = [
-    const HomeScreen(),
-    const FavoriteScreen(),
-    const CartScreen(),
-    const ProfileScreen(),
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: currentIndex);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  final screens = const [
+    HomeScreen(),
+    FavoriteScreen(),
+    CartScreen(),
+    ProfileScreen(),
   ];
+
+  void _onPageChanged(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: screens[currentIndex],
+      extendBody: true, // This makes the body extend behind the bottom nav
+
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: _onPageChanged,
+        physics: const NeverScrollableScrollPhysics(), // Disable swipe
+        children: screens,
+      ),
 
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+        onTap: _onTabTapped,
       ),
     );
   }
