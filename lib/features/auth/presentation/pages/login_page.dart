@@ -1,3 +1,4 @@
+import 'package:cafe_cool/features/navigation/presentation/pages/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cafe_cool/features/auth/presentation/pages/register_page.dart';
 
@@ -8,7 +9,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -27,20 +29,17 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _fadeAnimation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeIn,
     );
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOut,
-    ));
-    
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+        );
+
     _animationController.forward();
   }
 
@@ -55,12 +54,12 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      
+
       // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
-      
+
       setState(() => _isLoading = false);
-      
+
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -132,10 +131,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.orange.shade700,
-              Colors.orange.shade900,
-            ],
+            colors: [Colors.orange.shade700, Colors.orange.shade900],
           ),
           shape: BoxShape.circle,
           boxShadow: [
@@ -146,11 +142,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
             ),
           ],
         ),
-        child: const Icon(
-          Icons.coffee,
-          size: 60,
-          color: Colors.white,
-        ),
+        child: const Icon(Icons.coffee, size: 60, color: Colors.white),
       ),
     );
   }
@@ -170,10 +162,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         const SizedBox(height: 8),
         Text(
           'Sign in to continue brewing',
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.7),
-            fontSize: 16,
-          ),
+          style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 16),
         ),
       ],
     );
@@ -184,10 +173,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _emailController,
@@ -218,10 +204,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _passwordController,
@@ -274,8 +257,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                     _rememberMe = value ?? false;
                   });
                 },
-                fillColor: MaterialStateProperty.resolveWith((states) {
-                  if (states.contains(MaterialState.selected)) {
+                fillColor: WidgetStateProperty.resolveWith((states) {
+                  if (states.contains(WidgetState.selected)) {
                     return Colors.orange.shade700;
                   }
                   return Colors.white.withOpacity(0.3);
@@ -286,10 +269,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               ),
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Remember me',
-              style: TextStyle(color: Colors.white70),
-            ),
+            const Text('Remember me', style: TextStyle(color: Colors.white70)),
           ],
         ),
         TextButton(
@@ -334,10 +314,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               )
             : const Text(
                 'Login',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
       ),
     );
@@ -404,10 +381,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

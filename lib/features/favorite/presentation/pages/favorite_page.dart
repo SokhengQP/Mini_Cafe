@@ -1,71 +1,68 @@
-import 'package:cafe_cool/shared/widgets/favorite_card.dart';
 import 'package:flutter/material.dart';
+import 'package:cafe_cool/shared/widgets/coffee_card.dart';
 
-class FavoriteScreen extends StatelessWidget {
-  const FavoriteScreen({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({super.key});
+
+  // Demo favorite list (later this should come from state / database)
+  final List<Map<String, String>> favorites = const [
+    {"name": "Arabica", "price": "18", "imagePath": "assets/images/1.png"},
+    {"name": "Robusta", "price": "20", "imagePath": "assets/images/2.png"},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 10),
-
-              /// Title
-              const Text(
-                "Favorites",
-                style: TextStyle(
-                  // color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+      appBar: AppBar(title: const Text("Favorites ❤️"), centerTitle: true),
+      body: favorites.isEmpty
+          ? _buildEmptyState()
+          : GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+              physics: const BouncingScrollPhysics(),
+              itemCount: favorites.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.50,
               ),
+              itemBuilder: (context, index) {
+                final coffee = favorites[index];
 
-              const SizedBox(height: 18),
+                return TweenAnimationBuilder(
+                  duration: Duration(milliseconds: 400 + index * 100),
+                  tween: Tween<double>(begin: 0, end: 1),
+                  builder: (context, double value, child) {
+                    return Transform.scale(
+                      scale: value,
+                      child: Opacity(
+                        opacity: value,
+                        child: CoffeeCard(
+                          name: coffee["name"]!,
+                          price: coffee["price"]!,
+                          imagePath: coffee["imagePath"],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+    );
+  }
 
-              /// Search Bar
-              Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1E1E1E),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
-                    hintText: "Search favorite coffee",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none,
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 14),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              /// Favorite Grid
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 18,
-                  crossAxisSpacing: 18,
-                  children: const [
-                    FavoriteCard(name: "Arabica", price: "18"),
-                    FavoriteCard(name: "Robusta", price: "20"),
-                    FavoriteCard(name: "Excelsa", price: "15"),
-                    FavoriteCard(name: "Liberica", price: "12"),
-                  ],
-                ),
-              ),
-            ],
+  Widget _buildEmptyState() {
+    return SizedBox.expand(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.favorite_border, size: 80, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            "No favorite coffee yet",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
-        ),
+        ],
       ),
     );
   }

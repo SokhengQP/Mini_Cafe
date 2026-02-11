@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -219,17 +218,29 @@ class _NotificationPageState extends State<NotificationPage>
           children: [
             _buildChip('All', notifications.length, true),
             const SizedBox(width: 10),
-            _buildChip('Promotions', 
-              notifications.where((n) => n.type == NotificationType.promotion).length,
-              false),
+            _buildChip(
+              'Promotions',
+              notifications
+                  .where((n) => n.type == NotificationType.promotion)
+                  .length,
+              false,
+            ),
             const SizedBox(width: 10),
-            _buildChip('Orders',
-              notifications.where((n) => n.type == NotificationType.order).length,
-              false),
+            _buildChip(
+              'Orders',
+              notifications
+                  .where((n) => n.type == NotificationType.order)
+                  .length,
+              false,
+            ),
             const SizedBox(width: 10),
-            _buildChip('Rewards',
-              notifications.where((n) => n.type == NotificationType.rewards).length,
-              false),
+            _buildChip(
+              'Rewards',
+              notifications
+                  .where((n) => n.type == NotificationType.rewards)
+                  .length,
+              false,
+            ),
           ],
         ),
       ),
@@ -497,12 +508,7 @@ class _NotificationPageState extends State<NotificationPage>
 }
 
 // Models
-enum NotificationType {
-  promotion,
-  order,
-  newProduct,
-  rewards,
-}
+enum NotificationType { promotion, order, newProduct, rewards }
 
 class NotificationItem {
   final String id;

@@ -1,5 +1,5 @@
+import 'package:cafe_cool/features/navigation/presentation/pages/main_navigation_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cafe_cool/shared/layout/main_navigation_screen.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -8,7 +8,8 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderStateMixin {
+class _RegisterPageState extends State<RegisterPage>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -30,20 +31,17 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    
+
     _fadeAnimation = CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeIn,
     );
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOut,
-    ));
-    
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+        );
+
     _animationController.forward();
   }
 
@@ -65,19 +63,21 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
             content: const Text('Please accept the terms and conditions'),
             backgroundColor: Colors.red.shade700,
             behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         );
         return;
       }
 
       setState(() => _isLoading = true);
-      
+
       // Simulate API call
       await Future.delayed(const Duration(seconds: 2));
-      
+
       setState(() => _isLoading = false);
-      
+
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -153,10 +153,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
@@ -171,10 +168,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Colors.orange.shade700,
-              Colors.orange.shade900,
-            ],
+            colors: [Colors.orange.shade700, Colors.orange.shade900],
           ),
           shape: BoxShape.circle,
           boxShadow: [
@@ -185,11 +179,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
             ),
           ],
         ),
-        child: const Icon(
-          Icons.coffee,
-          size: 50,
-          color: Colors.white,
-        ),
+        child: const Icon(Icons.coffee, size: 50, color: Colors.white),
       ),
     );
   }
@@ -209,10 +199,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
         const SizedBox(height: 8),
         Text(
           'Sign up to get started',
-          style: TextStyle(
-            color: Colors.white.withOpacity(0.7),
-            fontSize: 16,
-          ),
+          style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 16),
         ),
       ],
     );
@@ -223,10 +210,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _nameController,
@@ -253,10 +237,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _emailController,
@@ -287,10 +268,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _passwordController,
@@ -332,10 +310,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextFormField(
         controller: _confirmPasswordController,
@@ -347,7 +322,9 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
           prefixIcon: Icon(Icons.lock_outline, color: Colors.orange.shade300),
           suffixIcon: IconButton(
             icon: Icon(
-              _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
+              _isConfirmPasswordVisible
+                  ? Icons.visibility
+                  : Icons.visibility_off,
               color: Colors.orange.shade300,
             ),
             onPressed: () {
@@ -385,8 +362,8 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
                 _acceptTerms = value ?? false;
               });
             },
-            fillColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.selected)) {
+            fillColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.selected)) {
                 return Colors.orange.shade700;
               }
               return Colors.white.withOpacity(0.3);
@@ -444,10 +421,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
               )
             : const Text(
                 'Sign Up',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
       ),
     );
@@ -514,10 +488,7 @@ class _RegisterPageState extends State<RegisterPage> with SingleTickerProviderSt
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

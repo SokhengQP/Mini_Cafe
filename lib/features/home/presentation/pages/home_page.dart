@@ -8,37 +8,22 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   String selectedCategory = 'All';
-  
+
   final List<String> categories = ['All', 'Hot', 'Iced', 'Special'];
-  
+
   // Coffee data with network images
   final List<Map<String, String>> coffees = [
-    {
-      "name": "Arabica",
-      "price": "18",
-      "imageUrl": "../../../assets/images/cofes/1.png",
-    },
-    {
-      "name": "Robusta",
-      "price": "20",
-      "imageUrl": "../../../assets/images/cofes/2.png",
-    },
-    {
-      "name": "Excelsa",
-      "price": "15",
-      "imageUrl": "../../../assets/images/cofes/3.png",
-    },
-    {
-      "name": "Liberica",
-      "price": "12",
-      "imageUrl": "../../../assets/images/cofes/4.png",
-    },
+    {"name": "Arabica", "price": "18", "imagePath": "assets/images/1.png"},
+    {"name": "Robusta", "price": "20", "imagePath": "assets/images/2.png"},
+    {"name": "Excelsa", "price": "15", "imagePath": "assets/images/3.png"},
+    {"name": "Liberica", "price": "12", "imagePath": "assets/images/4.png"},
   ];
-  
+
   @override
   void initState() {
     super.initState();
@@ -81,15 +66,26 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildHeader(),
-                  const SizedBox(height: 25),
-                  _buildSearchBar(),
-                  const SizedBox(height: 25),
-                  _buildCategories(),
-                  const SizedBox(height: 25),
                   Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildHeader(),
+                          const SizedBox(height: 25),
+                          _buildSearchBar(),
+                          const SizedBox(height: 25),
+                          _buildCategories(),
+                          const SizedBox(height: 25),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  /// Grid remains fixed below
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.55,
                     child: _buildCoffeeGrid(),
                   ),
                 ],
@@ -116,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(height: 5),
             const Text(
               "What coffee are\nyou craving?",
               style: TextStyle(
@@ -153,32 +148,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.2),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
       ),
       child: TextField(
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: "Search your coffee...",
-          hintStyle: TextStyle(
-            color: Colors.white.withOpacity(0.5),
-          ),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Colors.orange.shade300,
-          ),
+          hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+          prefixIcon: Icon(Icons.search, color: Colors.orange.shade300),
           suffixIcon: Container(
             margin: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: Colors.orange.shade700,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(
-              Icons.tune,
-              color: Colors.white,
-            ),
+            child: const Icon(Icons.tune, color: Colors.white),
           ),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(
@@ -192,14 +176,14 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Widget _buildCategories() {
     return SizedBox(
-      height: 45,
+      height: 40,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (context, index) {
           final category = categories[index];
           final isSelected = selectedCategory == category;
-          
+
           return GestureDetector(
             onTap: () {
               setState(() {
@@ -231,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     ? [
                         BoxShadow(
                           color: Colors.orange.shade700.withOpacity(0.4),
-                          blurRadius: 15,
+                          blurRadius: 16,
                           offset: const Offset(0, 5),
                         ),
                       ]
@@ -242,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   category,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 15,
+                    fontSize: 14,
                     fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                   ),
                 ),
@@ -260,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         crossAxisCount: 2,
         crossAxisSpacing: 15,
         mainAxisSpacing: 15,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.50,
       ),
       itemCount: coffees.length,
       physics: const BouncingScrollPhysics(),
@@ -276,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 child: CoffeeCard(
                   name: coffees[index]["name"]!,
                   price: coffees[index]["price"]!,
-                  imageUrl: coffees[index]["imageUrl"],
+                  imagePath: coffees[index]["imagePath"],
                 ),
               ),
             );

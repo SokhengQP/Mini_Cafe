@@ -4,12 +4,14 @@ class ProfileMenuTile extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool isLogout;
+  final VoidCallback? onTap; // ✅ Add this
 
   const ProfileMenuTile({
     super.key,
     required this.icon,
     required this.title,
     this.isLogout = false,
+    this.onTap, // ✅ Add this
   });
 
   @override
@@ -21,6 +23,7 @@ class ProfileMenuTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
       ),
       child: ListTile(
+        onTap: onTap, // ✅ Connect here
         leading: Icon(icon, color: isLogout ? Colors.red : Colors.white),
         title: Text(
           title,

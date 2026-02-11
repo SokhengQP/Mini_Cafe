@@ -1,6 +1,6 @@
 import 'package:cafe_cool/features/cart/presentation/pages/cart_page.dart';
-import 'package:cafe_cool/features/favorite/presentation/pages/favorite_page.dart';
 import 'package:cafe_cool/features/home/presentation/pages/home_page.dart';
+import 'package:cafe_cool/features/orders/presentation/pages/favorite_page.dart';
 import 'package:cafe_cool/features/profile/presentation/pages/profile_page.dart';
 import 'package:cafe_cool/shared/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +57,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       extendBody: true, // This makes the body extend behind the bottom nav
-      
+
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
